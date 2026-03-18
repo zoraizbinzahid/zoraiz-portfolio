@@ -39,7 +39,7 @@ export default async function Home() {
     <main className="relative flex min-h-screen flex-col items-center bg-transparent text-white p-6 md:p-24 selection:bg-cyan-400 selection:text-black">
       
       {/* 1. Hero Section: Big Name Reveal */}
-      <Hero name={data.about?.name} />
+      <Hero/>
       
       {/* 2. About Section */}
       <About bio={data.about?.bio} profileImage={data.about?.profileImageUrl} />
@@ -51,11 +51,8 @@ export default async function Home() {
       <Projects projects={data.projects || []} />
 
       {/* 5. Contact Section */}
-      <Contact socials={data.about?.socials || []} />
+      <Contact />
       
-      <footer className="mt-60 pb-10 text-zinc-600 text-[10px] md:text-xs tracking-widest uppercase text-center border-t border-white/5 pt-10 w-full max-w-5xl">
-        © 2026 Zoraiz Zahid — Built with Next.js & Sanity
-      </footer>
     </main>
   );
 }
