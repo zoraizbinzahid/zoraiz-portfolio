@@ -1,26 +1,88 @@
 @import "tailwindcss";
 
+@theme {
+  --color-background: #09090b; /* Zinc-950 */
+  --color-foreground: #fafafa;
+  --color-accent: #22d3ee;     /* Cyan Accent */
+}
+
+/* --- 1. MOUSE POINTER FIX --- */
+/* I have removed all "cursor: none" rules so your pointer is ALWAYS visible */
+html, body {
+  cursor: default !important;
+}
+
+a, button, .glass-card, input, textarea {
+  cursor: pointer !important; /* Ensures links show the hand icon */
+}
+
+/* --- 2. CUSTOM SLIM SCROLLBAR --- */
+::-webkit-scrollbar {
+  width: 6px; 
+}
+
+::-webkit-scrollbar-track {
+  background: #09090b; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272a; 
+  border-radius: 100px;
+  border: 1px solid #09090b; 
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #22d3ee; 
+  box-shadow: 0 0 15px rgba(34, 211, 238, 0.4);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #27272a #09090b;
+}
+
+/* --- 3. THEME & CORE STYLES --- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #09090b;
+  --foreground: #fafafa;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #09090b; 
+  color: #fafafa;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-osx-font-smoothing: grayscale;
+}
+
+main {
+  background: transparent !important;
+}
+
+::selection {
+  background-color: #22d3ee;
+  color: #000;
+}
+
+@layer utilities {
+  .glow-text-cyan {
+    text-shadow: 0 0 20px rgba(34, 211, 238, 0.4);
+  }
+
+  /* Glassmorphism used in your Contact and About sections */
+  .glass-card {
+    background: rgba(9, 9, 11, 0.4); 
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: border-color 0.5s ease, box-shadow 0.5s ease;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px; 
 }
