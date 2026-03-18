@@ -11,6 +11,15 @@ const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"]
 export const metadata: Metadata = {
   title: "Zoraiz Zahid | Portfolio",
   description: "Modern Web Developer & Designer",
+  // This tells Next.js to use your new Charcoal & Cyan ZZ logo
+  icons: {
+    icon: [
+      {
+        url: "/icon.svg?v=4", 
+        type: "image/svg+xml",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -19,9 +28,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#09090b]`}>
         {/* Layer 0: The Grid & Moving Light */}
         <Background />
-
-    
-       
 
         {/* Layer 2: The Grain (Overlay) */}
         <div className="fixed inset-0 z-[1] pointer-events-none opacity-[0.04] mix-blend-overlay">
