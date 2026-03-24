@@ -1,0 +1,21 @@
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="50" cy="50" r="50" fill="#000000"/>
+
+  <g filter="drop-shadow(0px 0px 8px rgba(34,211,238,0.3))">
+    <path 
+      d="M25 35H50L25 65H50" 
+      stroke="white" 
+      stroke-width="12" 
+      stroke-linecap="square" 
+      stroke-linejoin="miter"
+    />
+    
+    <path 
+      d="M50 35H75L50 65H75" 
+      stroke="#22d3ee" 
+      stroke-width="12" 
+      stroke-linecap="square" 
+      stroke-linejoin="miter"
+    />
+  </g>
+</svg>
