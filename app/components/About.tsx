@@ -52,7 +52,7 @@ export default function About({ bio, profileImage }: AboutProps) {
           viewport={{ once: false, amount: 0.3 }}
           className="flex-1 text-center md:text-left"
         >
-          <p className="text-zinc-300 text-2xl md:text-4xl font-light leading-snug tracking-tight">
+          <p className="text-zinc-300 text-2xl md:text-xl font-light leading-snug tracking-tight">
             {bio}
           </p>
         </motion.div>
