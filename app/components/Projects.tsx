@@ -9,44 +9,28 @@ interface Project {
   description: string;
   techStack: string[];
   imageUrl?: string;
-  projectUrl?: string;
+  projectUrl?: string; 
 }
 
-// 1. THE STAGGER CONTAINER (Same as Skills)
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.25, // That slow, rhythmic wave
-    },
+    transition: { staggerChildren: 0.25 },
   },
 };
 
-// 2. THE REVEAL ANIMATION (Same as Skills "Scale-Up-Top")
 const projectRevealVariants: Variants = {
-  hidden: { 
-    opacity: 0, 
-    scale: 0.8, 
-    y: 100, 
-  },
+  hidden: { opacity: 0, scale: 0.8, y: 100 },
   visible: { 
-    opacity: 1, 
-    scale: 1, 
-    y: 0,
-    transition: {
-      type: "spring",
-      stiffness: 80, 
-      damping: 20,
-      mass: 1.2
-    }
+    opacity: 1, scale: 1, y: 0,
+    transition: { type: "spring", stiffness: 80, damping: 20, mass: 1.2 }
   },
 };
 
 function ProjectCard({ project }: { project: Project }) {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-
   const mouseXSpring = useSpring(x, { stiffness: 150, damping: 20 });
   const mouseYSpring = useSpring(y, { stiffness: 150, damping: 20 });
 
@@ -55,40 +39,30 @@ function ProjectCard({ project }: { project: Project }) {
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    const xPct = (e.clientX - rect.left) / rect.width - 0.5;
-    const yPct = (e.clientY - rect.top) / rect.height - 0.5;
-    x.set(xPct);
-    y.set(yPct);
+    x.set((e.clientX - rect.left) / rect.width - 0.5);
+    y.set((e.clientY - rect.top) / rect.height - 0.5);
   };
 
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
+  const handleMouseLeave = () => { x.set(0); y.set(0); };
 
   return (
-    <motion.div 
-      variants={projectRevealVariants} // Apply the reveal variant here
-      onClick={() => project.projectUrl && window.open(project.projectUrl, "_blank")}
+    <motion.div
+      variants={projectRevealVariants}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={{ 
-        rotateX, 
-        rotateY, 
-        transformStyle: "preserve-3d" 
-      }}
-      whileHover={{ scale: 1.02 }} 
-      className="group min-w-[88vw] md:min-w-0 snap-center relative p-5 bg-zinc-900/20 backdrop-blur-xl rounded-[2.5rem] border border-zinc-800/50 hover:border-cyan-400/40 transition-colors duration-500 cursor-pointer overflow-hidden"
+      style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+      whileHover={{ scale: 1.02 }}
+      className="group min-w-[88vw] md:min-w-0 snap-center relative p-5 bg-zinc-900/20 backdrop-blur-xl rounded-[2.5rem] border border-zinc-800/50 hover:border-cyan-400/40 transition-colors duration-500 overflow-hidden"
     >
       <div style={{ transform: "translateZ(60px)", transformStyle: "preserve-3d" }} className="relative z-10">
         <div className="absolute inset-0 bg-cyan-500/[0.05] opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-[2.5rem] blur-3xl pointer-events-none" />
 
         {project.imageUrl && (
           <div className="relative w-full h-64 md:h-52 mb-6 overflow-hidden rounded-[1.8rem] border border-zinc-800/30">
-            <Image 
-              src={project.imageUrl} 
+            <Image
+              src={project.imageUrl}
               alt={project.title}
-              fill 
+              fill
               className="object-cover transition-transform duration-700 group-hover:scale-110"
               sizes="(max-width: 768px) 100vw, 50vw"
             />
@@ -97,23 +71,31 @@ function ProjectCard({ project }: { project: Project }) {
         )}
 
         <div className="px-2 pb-2" style={{ transform: "translateZ(40px)" }}>
-          <div className="flex justify-between items-start">
-            <h3 className="text-2xl md:text-3xl font-black text-white group-hover:text-cyan-400 transition-colors duration-500 tracking-tighter">
-              {project.title}
-            </h3>
-            <span className="text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-xl">↗</span>
-          </div>
+          <h3 className="text-2xl md:text-3xl font-black text-white group-hover:text-cyan-400 transition-colors duration-500 tracking-tighter">
+            {project.title}
+          </h3>
           
           <p className="text-zinc-400 mt-4 text-sm line-clamp-2 leading-relaxed">
             {project.description}
           </p>
 
+          {/* NEW: Dedicated Live Demo Link */}
+          {project.projectUrl && (
+            <div className="mt-6">
+              <a 
+                href={project.projectUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-[10px] font-bold uppercase tracking-widest rounded-xl hover:bg-cyan-500 hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(6,182,212,0.1)] hover:shadow-[0_0_20px_rgba(6,182,212,0.3)]"
+              >
+                Live Demo ↗
+              </a>
+            </div>
+          )}
+
           <div className="flex gap-2 mt-6 flex-wrap">
             {project.techStack?.map((tech) => (
-              <span 
-                key={tech} 
-                className="text-[9px] px-3 py-1 bg-zinc-950 text-cyan-400/80 font-bold uppercase tracking-widest rounded-full border border-zinc-800/50"
-              >
+              <span key={tech} className="text-[9px] px-3 py-1 bg-zinc-950 text-cyan-400/80 font-bold uppercase tracking-widest rounded-full border border-zinc-800/50">
                 {tech}
               </span>
             ))}
@@ -126,11 +108,10 @@ function ProjectCard({ project }: { project: Project }) {
 
 export default function Projects({ projects }: { projects: Project[] }) {
   return (
-    <section id="projects" className="relative mt-60 w-full max-w-5xl px-4 overflow-visible">
+    <section id="projects" className="relative mt-60 w-full max-w-5xl px-4">
       <SectionHeader title="Selected Works" />
-
-      <motion.div 
-        variants={containerVariants} // Trigger stagger here
+      <motion.div
+        variants={containerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.1 }}
