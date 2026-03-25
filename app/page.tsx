@@ -21,7 +21,7 @@ export default async function Home() {
       "profileImageUrl": profileImage.asset->url,
       socials
     },
-    "skills": *[_type == "skill"] {
+    "skills": *[_type == "skill"] | order(_createdAt asc) {
       _id,
       title,
       // Updated to fetch the full icon asset for your urlFor function
