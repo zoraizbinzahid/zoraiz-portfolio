@@ -23,7 +23,6 @@ interface Skill {
 
 const urlFor = (source: SanityImage) => builder.image(source);
 
-// Restoring your specific, deliberate staggering
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
@@ -34,7 +33,6 @@ const containerVariants: Variants = {
   },
 };
 
-// Restoring the specific scale-up animation you liked
 const scaleUpTopVariants: Variants = {
   hidden: { 
     opacity: 0, 
@@ -75,7 +73,6 @@ export default function Skills({ skills }: { skills: Skill[] }) {
           >
             <Magnetic>
               <div className="flex flex-col items-center gap-4 group cursor-none">
-                {/* The specific card container from your original screenshot */}
                 <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-zinc-900/40 backdrop-blur-md border border-zinc-800/50 flex items-center justify-center group-hover:border-cyan-400/50 group-hover:shadow-[0_0_20px_rgba(34,211,238,0.1)] transition-all duration-500">
                   {skill.icon && (
                     <Image 
@@ -83,11 +80,11 @@ export default function Skills({ skills }: { skills: Skill[] }) {
                       alt={skill.title} 
                       width={35}
                       height={35}
-                      className="object-contain grayscale group-hover:grayscale-0 transition-all duration-500"
+                      // FIXED: Removed grayscale classes so colors always show
+                      className="object-contain transition-all duration-500"
                     />
                   )}
                 </div>
-                {/* The original HEHE text style */}
                 <p className="text-[9px] text-zinc-500 group-hover:text-cyan-400 font-bold uppercase tracking-[0.2em] transition-colors">
                   {skill.title}
                 </p>
