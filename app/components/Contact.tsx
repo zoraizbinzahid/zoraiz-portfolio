@@ -6,7 +6,7 @@ import { useState } from "react";
 export default function Contact() {
   const email = "zoraizbinzahid@gmail.com";
   const githubLink = "https://github.com/zoraizbinzahid";
-  const linkedinLink = "https://www.linkedin.com/in/zoraiz-bin-zahid-4863b91b4/";
+  const linkedinLink = "https://www.linkedin.com/in/zoraiz-b-zahid-4863b91b4/";
   
   const [copied, setCopied] = useState(false);
 
